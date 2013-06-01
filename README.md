@@ -1,4 +1,58 @@
 sushi
 =====
 
-Apache Websocket Shell
+SetUid SHell Interactive - Apache Websocket Shell
+
+using the apache websocket module create a shell plugin that can allow users / admin to open a shell
+in a VT100 javascript popup.
+
+The following vt100 javascript package works out the box and is a fork of shellinabox
+http://wasd.vsm.com.au/wasd_root/src/dclinabox/readmore.html
+
+they include a websock library and daemon that i aim to replace.
+
+Using the apache-websockts module the dumb protocol i plan to implement the code into a plugin.
+
+the plugin needs to create a thread fork a pty running a shell passing communication from the web socket to the pty.
+
+sushi is a setuid wrapper similaer in purpose to suexec but with the purpose of been a "getty" it authenticates
+the user against PAM and spawns login "pre authenticated" allowing better control of the process.
+
+the wrapper is setuid/setgid [chmod 6755] and performs the following
+1)Authenticate the user [account/session should be opened not yet]
+2)Make sure there is a passwd ent for the user authenticating
+3)Initialise the groups to that of the user loging in
+4)Some *BLACK MAGIC* if the user is a member of a SU group allow him SU access [sudo sh]
+5)Set the ruid/guid to that of the user [possibly SU see 4]
+6)chdir to the users home dir
+
+if any of these except for 4 fail the wrapper will fail this is not as "strict" as suexec nor is needed to be,
+we are authenticating the user.
+
+on success login is forked/exec we should be passing the host info and enviroment one day
+waitpid will get the result code and return with it.
+
+forkpty
+=======
+
+this is a scratch pad app eventually to be moved into a apache websockets plugin it runs sushi with forkpty
+it puts STDIN into RAW mode sets the pty size to that of STDOUT.
+
+two threads are used for IO in blocking mode as opposed to using select/O_NONBLOCK for one having std... in 
+non blocking is a plan spawned by satan and we only require one thread when its put into a apach websocket plugin.
+
+forkpty accepts username and password as args that it passes to sushi these are optional and at least the password
+is stupid to pass on the command line.
+
+that said stupid is as stupid does .... so the command line of forkpty and sush is bodged so that all args vanish
+as soon as possible.
+
+the password should be passed via stdin and will be done automagically if basic auth is used for the /location in
+apache.
+
+this is very much WIP/RFC
+
+i have not added build tools yet will probably use autotools
+
+gcc sushi.c -o /usr/bin/sushi -lpam -lncurses -O2 -Wall -Werror;chmod 6755 /usr/bin/sushi
+gcc forkpty.c -g -o forkpty -lutil -lpthread -Wall -Werror

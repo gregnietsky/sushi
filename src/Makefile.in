@@ -65,7 +65,7 @@ PROGRAMS = $(bin_PROGRAMS)
 am_sushi_OBJECTS = sushi.$(OBJEXT)
 sushi_OBJECTS = $(am_sushi_OBJECTS)
 sushi_DEPENDENCIES =
-am_sushipty_OBJECTS = forkpty.$(OBJEXT)
+am_sushipty_OBJECTS = sushipty.$(OBJEXT)
 sushipty_OBJECTS = $(am_sushipty_OBJECTS)
 sushipty_DEPENDENCIES =
 DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
@@ -175,7 +175,7 @@ top_srcdir = @top_srcdir@
 ACLOCAL_AMFLAGS = -I m4
 sushi_SOURCES = sushi.c
 sushi_LDADD = -lpam -lncurses
-sushipty_SOURCES = forkpty.c
+sushipty_SOURCES = sushipty.c
 sushipty_LDADD = -lpthread -lutil
 all: all-am
 
@@ -264,8 +264,8 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/forkpty.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/sushi.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/sushipty.Po@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<

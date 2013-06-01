@@ -35,21 +35,21 @@ we are authenticating the user.
 on success login is forked/exec we should be passing the host info and enviroment one day
 waitpid will get the result code and return with it.
 
-forkpty
-=======
+sushipty
+========
 
 this is a scratch pad app eventually to be moved into a apache websockets plugin it runs sushi with forkpty
 it puts STDIN into RAW mode sets the pty size to that of STDOUT.
 
 two threads are used for IO in blocking mode as opposed to using select/O_NONBLOCK for one having std... in 
-non blocking is a plan spawned by satan and we only require one thread when its put into a apach websocket plugin.
+non blocking is a plan spawned by satan and we only require one thread when its put into a apache websocket plugin.
 
 ideally as the functions are the same we could call the same function for both threads with appropriate *pvt.
 
-forkpty accepts username and password as args that it passes to sushi these are optional and at least the password
+sushipty accepts username and password as args that it passes to sushi these are optional and at least the password
 is stupid to pass on the command line.
 
-that said stupid is as stupid does .... so the command line of forkpty and sush is bodged so that all args vanish
+that said stupid is as stupid does .... so the command line of sushipty and sush is bodged so that all args vanish
 as soon as possible.
 
 the password should be passed via stdin and will be done automagically if basic auth is used for the /location in

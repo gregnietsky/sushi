@@ -5,7 +5,7 @@ bin_PROGRAMS = sushi sushipty
 sushi_SOURCES = sushi.c
 sushi_LDADD = -lpam -lncurses
 
-sushipty_SOURCES = forkpty.c
+sushipty_SOURCES = sushipty.c
 sushipty_LDADD = -lpthread -lutil
 
 install-exec-hook:

@@ -11,9 +11,10 @@ http://wasd.vsm.com.au/wasd_root/src/dclinabox/readmore.html
 
 they include a websock library and daemon that i aim to replace.
 
-Using the apache-websockts module the dumb protocol i plan to implement the code into a plugin.
+Using the apache-websockts module the dumb protocol i plan to implement the code into a plugin.</BR>
+https://github.com/disconnect/apache-websocket
 
-the plugin needs to create a thread fork a pty running a shell passing communication from the web socket to the pty.
+the plugin needs to create a thread, fork a pty running a shell and pass communication from the web socket to the pty.
 
 sushi is a setuid wrapper similaer in purpose to suexec but with the purpose of been a "getty" it authenticates
 the user against PAM and spawns login "pre authenticated" allowing better control of the process.
@@ -43,6 +44,8 @@ it puts STDIN into RAW mode sets the pty size to that of STDOUT.
 two threads are used for IO in blocking mode as opposed to using select/O_NONBLOCK for one having std... in 
 non blocking is a plan spawned by satan and we only require one thread when its put into a apach websocket plugin.
 
+ideally as the functions are the same we could call the same function for both threads with appropriate *pvt.
+
 forkpty accepts username and password as args that it passes to sushi these are optional and at least the password
 is stupid to pass on the command line.
 
@@ -54,7 +57,10 @@ apache.
 
 this is very much WIP/RFC
 
-i have not added build tools yet will probably use autotools
+building
+========
 
-gcc sushi.c -o /usr/bin/sushi -lpam -lncurses -O2 -Wall -Werror;chmod 6755 /usr/bin/sushi<BR>
-gcc forkpty.c -g -o forkpty -lutil -lpthread -Wall -Werror
+autotools have been added for convinence please note its a "basic" setup.</br>
+you need to be root to install [chown/chmod] use "sudo make install"
+
+./configure && make && sudo make install

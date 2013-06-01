@@ -10,3 +10,4 @@ Makefile
 /src/forkpty
 /src/sushi
 /autom4te.cache
+/autoscan.log

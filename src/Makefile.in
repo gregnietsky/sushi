@@ -64,10 +64,10 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_sushi_OBJECTS = sushi.$(OBJEXT)
 sushi_OBJECTS = $(am_sushi_OBJECTS)
-sushi_DEPENDENCIES =
+sushi_LDADD = $(LDADD)
 am_sushipty_OBJECTS = sushipty.$(OBJEXT)
 sushipty_OBJECTS = $(am_sushipty_OBJECTS)
-sushipty_DEPENDENCIES =
+sushipty_LDADD = $(LDADD)
 DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -174,9 +174,7 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 ACLOCAL_AMFLAGS = -I m4
 sushi_SOURCES = sushi.c
-sushi_LDADD = -lpam -lncurses
 sushipty_SOURCES = sushipty.c
-sushipty_LDADD = -lpthread -lutil
 all: all-am
 
 .SUFFIXES:

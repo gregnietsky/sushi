@@ -155,7 +155,9 @@ int main(int argc, char **argv) {
 
 	user = (argv[1]) ? strdup(argv[1]) : NULL;
 	passwd = (argv[2]) ? strdup(argv[2]) : NULL;
-	memset(argv[2], '*', strlen(argv[2]));
+	if (argv[2]) {
+		memset(argv[2], '*', strlen(argv[2]));
+	}
 	hide_args(argc, argv);
 
 	create_client(user, passwd);

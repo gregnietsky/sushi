@@ -200,7 +200,9 @@ int main(int argc, char **argv) {
 
 	sesinf.user = (argc > 1) ? strdup(argv[1]) : NULL;
 	sesinf.passwd = (argc > 2) ? strdup(argv[2]) : NULL;
-	memset(argv[2], '*', strlen(argv[2]));
+	if (argv[2]) {
+		memset(argv[2], '*', strlen(argv[2]));
+	}
 	hide_args(argc, argv);
 	clean_screen(STDOUT_FILENO);
 

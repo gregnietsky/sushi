@@ -6,7 +6,7 @@ SetUid SHell Interactive - Apache Websocket Shell
 using the apache websocket module create a shell plugin that can allow users / admin to open a shell
 in a VT100 javascript popup.
 
-The following vt100 javascript package works out the box and is a fork of shellinabox
+The following vt100 javascript package works out the box and is a fork of shellinabox<BR>
 http://wasd.vsm.com.au/wasd_root/src/dclinabox/readmore.html
 
 they include a websock library and daemon that i aim to replace.
@@ -18,13 +18,15 @@ the plugin needs to create a thread fork a pty running a shell passing communica
 sushi is a setuid wrapper similaer in purpose to suexec but with the purpose of been a "getty" it authenticates
 the user against PAM and spawns login "pre authenticated" allowing better control of the process.
 
-the wrapper is setuid/setgid [chmod 6755] and performs the following
-1)Authenticate the user [account/session should be opened not yet]
-2)Make sure there is a passwd ent for the user authenticating
-3)Initialise the groups to that of the user loging in
-4)Some *BLACK MAGIC* if the user is a member of a SU group allow him SU access [sudo sh]
-5)Set the ruid/guid to that of the user [possibly SU see 4]
-6)chdir to the users home dir
+the wrapper is setuid/setgid [chmod 6755] and performs the following</BR>
+<UL>
+<LI>Authenticate the user [account/session should be opened not yet]</LI>
+<LI>Make sure there is a passwd ent for the user authenticating</LI>
+<LI>Initialise the groups to that of the user loging in</LI>
+<LI>Some *BLACK MAGIC* if the user is a member of a SU group allow him SU access [sudo sh]</Li>
+<LI>Set the ruid/guid to that of the user [possibly SU see 4]</LI>
+<LI>chdir to the users home dir</LI>
+</UL>
 
 if any of these except for 4 fail the wrapper will fail this is not as "strict" as suexec nor is needed to be,
 we are authenticating the user.
@@ -54,5 +56,5 @@ this is very much WIP/RFC
 
 i have not added build tools yet will probably use autotools
 
-gcc sushi.c -o /usr/bin/sushi -lpam -lncurses -O2 -Wall -Werror;chmod 6755 /usr/bin/sushi
+gcc sushi.c -o /usr/bin/sushi -lpam -lncurses -O2 -Wall -Werror;chmod 6755 /usr/bin/sushi<BR>
 gcc forkpty.c -g -o forkpty -lutil -lpthread -Wall -Werror

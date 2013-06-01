@@ -48,7 +48,7 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
-bin_PROGRAMS = sushi$(EXEEXT) forkpty$(EXEEXT)
+bin_PROGRAMS = sushi$(EXEEXT) sushipty$(EXEEXT)
 subdir = src
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in \
 	$(top_srcdir)/depcomp
@@ -62,12 +62,12 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_forkpty_OBJECTS = forkpty.$(OBJEXT)
-forkpty_OBJECTS = $(am_forkpty_OBJECTS)
-forkpty_DEPENDENCIES =
 am_sushi_OBJECTS = sushi.$(OBJEXT)
 sushi_OBJECTS = $(am_sushi_OBJECTS)
 sushi_DEPENDENCIES =
+am_sushipty_OBJECTS = forkpty.$(OBJEXT)
+sushipty_OBJECTS = $(am_sushipty_OBJECTS)
+sushipty_DEPENDENCIES =
 DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -76,8 +76,8 @@ COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 CCLD = $(CC)
 LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
-SOURCES = $(forkpty_SOURCES) $(sushi_SOURCES)
-DIST_SOURCES = $(forkpty_SOURCES) $(sushi_SOURCES)
+SOURCES = $(sushi_SOURCES) $(sushipty_SOURCES)
+DIST_SOURCES = $(sushi_SOURCES) $(sushipty_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -175,8 +175,8 @@ top_srcdir = @top_srcdir@
 ACLOCAL_AMFLAGS = -I m4
 sushi_SOURCES = sushi.c
 sushi_LDADD = -lpam -lncurses
-forkpty_SOURCES = forkpty.c
-forkpty_LDADD = -lpthread -lutil
+sushipty_SOURCES = forkpty.c
+sushipty_LDADD = -lpthread -lutil
 all: all-am
 
 .SUFFIXES:
@@ -251,12 +251,12 @@ uninstall-binPROGRAMS:
 
 clean-binPROGRAMS:
 	-test -z "$(bin_PROGRAMS)" || rm -f $(bin_PROGRAMS)
-forkpty$(EXEEXT): $(forkpty_OBJECTS) $(forkpty_DEPENDENCIES) $(EXTRA_forkpty_DEPENDENCIES) 
-	@rm -f forkpty$(EXEEXT)
-	$(LINK) $(forkpty_OBJECTS) $(forkpty_LDADD) $(LIBS)
 sushi$(EXEEXT): $(sushi_OBJECTS) $(sushi_DEPENDENCIES) $(EXTRA_sushi_DEPENDENCIES) 
 	@rm -f sushi$(EXEEXT)
 	$(LINK) $(sushi_OBJECTS) $(sushi_LDADD) $(LIBS)
+sushipty$(EXEEXT): $(sushipty_OBJECTS) $(sushipty_DEPENDENCIES) $(EXTRA_sushipty_DEPENDENCIES) 
+	@rm -f sushipty$(EXEEXT)
+	$(LINK) $(sushipty_OBJECTS) $(sushipty_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)

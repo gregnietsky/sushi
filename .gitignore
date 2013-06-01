@@ -1,0 +1,12 @@
+Makefile
+/config.h
+/config.log
+*.o
+.libs
+.deps
+/stamp-h1
+/configure.scan
+/config.status
+/src/forkpty
+/src/sushi
+/autom4te.cache

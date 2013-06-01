@@ -5,7 +5,7 @@ AC_PREREQ([2.69])
 AC_INIT([sushi], [0.1], [gregnietsky@gmail.com])
 AC_CONFIG_SRCDIR([src/sushi.c])
 AC_CONFIG_HEADERS([config.h])
-AM_INIT_AUTOMAKE()
+AM_INIT_AUTOMAKE
 
 # Checks for programs.
 AC_PROG_CC
